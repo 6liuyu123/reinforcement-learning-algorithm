@@ -35,9 +35,11 @@ class QLearning(object):
         self.QTable[self.state_transition(state), action] += self.learning_rate * (reward + self.gamma * Q_next - self.QTable[self.state_transition(state), action])
 
     def train(self, env, agent):
+        last_success_time = 0
         success_time = 0
         for i in range(self.train_times):
-            print(success_time)
+            print(success_time - last_success_time)
+            last_success_time = success_time
             for j in range(self.episode):
                 state = env.reset()
                 while True:
